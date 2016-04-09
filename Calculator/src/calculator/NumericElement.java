@@ -9,37 +9,39 @@ package calculator;
  *
  * @author guilherme
  */
-public class NumericElement extends ExpressionElement implements Comparable<NumericElement>{
+public class NumericElement extends ExpressionElement implements Comparable<NumericElement> {
 
     protected double value;
-    
+
     public NumericElement(double value) {
         this.value = value;
     }
-    
+
     @Override
     public boolean isOperator() {
         return false;
     }
-    
+
     public double getValue() {
         return value;
     }
-    
+
     @Override
     public boolean equals(Object other) {
-        if (other == this)
+        if (other == this) {
             return true;
-        
-        if (other == null)
+        }
+
+        if (other == null) {
             return false;
-        
+        }
+
         if (!(other instanceof NumericElement)) {
             return false;
         }
-                
+
         NumericElement otherNumeric = (NumericElement) other;
-        
+
         return otherNumeric.value == this.value;
     }
 
@@ -49,7 +51,7 @@ public class NumericElement extends ExpressionElement implements Comparable<Nume
         hash += 67 * this.value;
         return hash;
     }
-    
+
     @Override
     public String toString() {
         return "NumericElement<" + this.value + ">";
