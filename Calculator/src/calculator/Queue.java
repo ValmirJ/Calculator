@@ -126,6 +126,10 @@ public class Queue<X> implements Cloneable {
         
         // isso é apenas valido se this.first < this.last
         for (int i = this.first; i <= this.last; i++) {
+            // Checar se não é nulo:
+            // if (this.queue[i] == null && que.queue[i] != null)
+            //     return false;
+            
             if (!this.queue[i].equals(que.queue[i])) {
                 return false;
             }
@@ -134,6 +138,7 @@ public class Queue<X> implements Cloneable {
         //
         // Checar do primeiro ao fim array
         // for (int i = this.first; i < this.queue.length; i++) {
+        //    TODO: check de nulo
         //    if (!this.queue[i].equals(que.queue[i])) {
         //        return false;
         //    }
@@ -141,6 +146,7 @@ public class Queue<X> implements Cloneable {
         //
         // Chear do começo até o ultimo
         // for (int i = 0; i <= this.last; i++) {
+        //    TODO: check de nulo
         //    if (!this.queue[i].equals(que.queue[i])) {
         //        return false;
         //    }
