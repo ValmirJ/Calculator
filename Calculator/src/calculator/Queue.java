@@ -47,13 +47,22 @@ public class Queue<X> implements Cloneable {
         }
         if (elementCount >= queue.length) {
             throw new Exception("Queue is full");
-        }       
+        }
         if(last >= queue.length - 1){
             last = -1;
         }
+        if (elm instanceof Cloneable){
+             Class c = elm.getClass();
+             Class<?>[] formParams = null;
+             Object[] realParams = null;
+             Method m = c.getMethod("clone", formParams);
+             this.queue[this.first] = (X) m.invoke(elm, realParams);         
+            }
+        else{
+             this.queue[first] = elm;
+            }
         this.last++;
         this.elementCount++;
-        this.queue[last] = elm;
     }
 
     public X dequeue() throws Exception {
