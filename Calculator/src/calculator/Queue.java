@@ -53,7 +53,7 @@ public class Queue<X> implements Cloneable {
     }
 
     public void enqueue(X elm) throws Exception {
-       
+       // Checar se `elm != null`
         if (elementCount >= queue.length) {
             throw new Exception("Queue is full");
         }
@@ -62,6 +62,7 @@ public class Queue<X> implements Cloneable {
             last = -1;
         this.last++;
         this.elementCount++;
+        // Aqui você precisa clonar.
         this.queue[last] = elm;
     }
 
@@ -125,12 +126,33 @@ public class Queue<X> implements Cloneable {
         if(this.elementCount != que.elementCount){
             return false;
         }
-    
+        // isso é apenas valido se this.first < this.last
         for(int i = this.first; i <= this.last; i++) {
-            if (!this.queue[i].equals(que.queue[i])) {
-                return false;
-            }
+            // Checar se não é nulo:
+            // if (this.queue[i] == null && que.queue[i] != null)
+            //     return false;
+            
+             if (!this.queue[i].equals(que.queue[i])) {
+                 return false;
+             }
         }
+        // se auilo não for verdade....
+        //
+        // Checar do primeiro ao fim array
+        // for (int i = this.first; i < this.queue.length; i++) {
+        //    TODO: check de nulo
+        //    if (!this.queue[i].equals(que.queue[i])) {
+        //        return false;
+        //    }
+        // }
+        //
+        // Chear do começo até o ultimo
+        // for (int i = 0; i <= this.last; i++) {
+        //    TODO: check de nulo
+        //    if (!this.queue[i].equals(que.queue[i])) {
+        //        return false;
+        //    }
+        // }
         
         return true;
     }
@@ -144,6 +166,8 @@ public class Queue<X> implements Cloneable {
         hash += hash * 3 + this.first;
         hash += hash * 3 + this.last;
         
+        // isso é apenas valido se this.first < this.last.
+        // Faça o caso contrario também
         for(int i = this.first; i <= this.last; i++)
             hash = hash * 3 + this.queue[i].hashCode();
         return hash;
@@ -153,9 +177,15 @@ public class Queue<X> implements Cloneable {
     public String toString() {
 
         String str = "Queue = {";
+        // isso é apenas valido se this.first < this.last.
+        // Faça o caso contrario também
          for(int i = this.first; i <= this.last; i++) {
+             // this.queue[i].toString()
             str += this.queue[i] + " , ";
         }
+        
+        // Hu3ragem
+        // de fix disso lá em cima
         if (this.last > - 1) {
             str += this.queue[this.last];
         }
