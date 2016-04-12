@@ -61,6 +61,7 @@ public class Stack<X> implements Cloneable {
             throw new Exception("Empty Stack");
         
         this.top--;
+        // Esqueceu de clonar
         return (X)this.p[this.top];
     }
     
