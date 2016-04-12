@@ -153,7 +153,18 @@ public class Queue<X> implements Cloneable {
         // comece isso com super.hashCode()
         int hash = 3;
         
-        
+        // Para cada atributo que você checou no equals, multiplique o hash e adicione o hash do atributo.
+        // hash += hash * 3 + this.queue.length;
+        // hash += hash * 3 + this.elementCount;
+        // hash += hash * 3 + this.first;
+        // hash += hash * 3 + this.last;
+        // 
+        // Lembrando que isso é apenas valido se this.first < this.last
+        // for (int i = this.first; i <= this.last; i++) {
+        //    hash += hash * 3 + this.queue[i].hashCode();
+        // }
+        //
+        // se auilo não for verdade fazer o mesmo esquema do equals
         return hash;
     }
 
@@ -161,9 +172,12 @@ public class Queue<X> implements Cloneable {
     public String toString() {
 
         String str = "Queue = {";
+        // Faça o mesmo algoritmo de for do equals e do hashCode
         for (int i = this.first; i < this.last; i++) {
             str += this.queue[i] + " , ";
         }
+        
+        // hu3r@g3m T0P
         if (this.last > - 1) {
             str += this.queue[this.last];
         }
