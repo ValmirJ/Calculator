@@ -32,7 +32,7 @@ public class Queue<X> implements Cloneable {
     }
 
     public Queue(Queue s) throws Exception {
-       
+         // Checar se `s != null`
          queue = new Object[s.queue.length];
          this.first = s.first;
          this.last = s.last;
