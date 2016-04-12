@@ -20,8 +20,11 @@ public class Stack<X> implements Cloneable {
         
         this.top = another.top;
         for(int i = 0; i < this.top; i++)
+        // Abre esse treco sempre ao lado ou sempre na linha de baixo.
+        // AQUI vai se ao lado.
         {
             if(another.p[i] instanceof Cloneable)
+            // Aqui tb
             {
                 Class c = p[i].getClass();
                 Class<?>[] paramsForm = null;
@@ -107,6 +110,19 @@ public class Stack<X> implements Cloneable {
         String str = "Topo: " + this.top + "\nPilha: ";
         
         for(int i = 0; i < this.top; i++) {
+            // O cast não é necessario.
+            // chamar (X)this.p[i].toString(); ou this.p[i].toString(); sem cast é a mesma coisa.
+            // o java sempre chama o método da classe na qual o objeto foi instanciado.
+            // Ex.
+            // Integer a = new Integer()
+            // a.toString => Integer#toString()
+            //
+            // Supondo que a classe abaixa é válida:
+            // class NumeroInteiro extends Integer { .... }
+            //
+            // NumeroInteiro i = new NumeroInteiro(20)
+            // Integer b = (Integer) i;
+            // b.toString() => NumeroInteiro#toString()
             str += (X)this.p[i].toString();  // ***Creio*** que fazendo o cast ele vai pegar o metodo toString da classe e não da Classe Objeto
         }
         return str;
