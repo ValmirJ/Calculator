@@ -9,8 +9,6 @@ package calculator;
  *
  * @author 15096134
  */
-//Guilherme, fiz as mudanças de acordo com aquilo que foi comentado
-//Tirei os seus comentários para que você possa fazer outros, caso necessário
 public class Queue<X> implements Cloneable {
 
     protected Object[] queue;
@@ -26,6 +24,10 @@ public class Queue<X> implements Cloneable {
         this.queue = new Object [maximumSize];
         this.first = 0;
         this.last = -1;
+        // Esse elementCount deveria começar com 0, dado que isso seria um contador para saber-mos
+        // qtos elementos tem na fila.
+        //
+        // Note que se precisar saber o valor do maximumSize, você deverá usar `this.queue.length`
         this.elementCount = maximumSize;
     }
 
@@ -35,7 +37,14 @@ public class Queue<X> implements Cloneable {
          this.first = s.first;
          this.last = s.last;
          this.elementCount = s.elementCount;
+         // Você tem que fazer na verdade:
+         // this.queue = queue
          this.queue = s.queue;
+         // e não `s.queue`
+         
+         // Depois clonar os elementos de `s.queue` para `this.queue`
+         // this.queue[0] = s.queue[0].clone()
+         // Note que aquilo acima não funciona. Vamos seguir a instrução do Maligno por hora: use o reflect.
     }
 
     public void enqueue(X elm) throws Exception {
@@ -43,6 +52,7 @@ public class Queue<X> implements Cloneable {
         if (elementCount >= queue.length) {
             throw new Exception("Queue is full");
         }
+        // last >= queue.length - 1
         if(last == queue.length - 1)
             last = -1;
         this.last++;
@@ -52,10 +62,14 @@ public class Queue<X> implements Cloneable {
 
     public X dequeue() throws Exception {
         X dequeued; 
+        // Faça a verificação de fila vazia antes de pegar o objeto do vetor
           dequeued = (X) this.queue[this.first];
           
+        // Esse if tem que ir pra cima ^
         if (this.elementCount <= 0) 
             throw new Exception("Queue is empty");
+            
+        // Isso TEM que ficar depois do this.first++
         if (this.first == queue.length)
             first = 0;
         
@@ -102,17 +116,44 @@ public class Queue<X> implements Cloneable {
         if (this.last != que.last) {
             return false;
         }
+        
+        // Checar se a capacidade das filas é igual!
+        // this.queue.length != que.queue.length
+        
+        // Checar se o total de elementos é igual.
+        // this.elementCount != que.elementCount
+        // 
+        
+        // isso é apenas valido se this.first < this.last
         for (int i = this.first; i <= this.last; i++) {
             if (!this.queue[i].equals(que.queue[i])) {
                 return false;
             }
         }
+        // se auilo não for verdade....
+        //
+        // Checar do primeiro ao fim array
+        // for (int i = this.first; i < this.queue.length; i++) {
+        //    if (!this.queue[i].equals(que.queue[i])) {
+        //        return false;
+        //    }
+        // }
+        //
+        // Chear do começo até o ultimo
+        // for (int i = 0; i <= this.last; i++) {
+        //    if (!this.queue[i].equals(que.queue[i])) {
+        //        return false;
+        //    }
+        // }
         return true;
     }
 
     @Override
     public int hashCode() {
+        // comece isso com super.hashCode()
         int hash = 3;
+        
+        
         return hash;
     }
 
