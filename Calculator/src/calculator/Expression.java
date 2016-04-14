@@ -1,6 +1,6 @@
 package calculator;
 
-public class Expression implements ExpressionContainer {
+public class Expression implements ExpressionContainer<ExpressionElement> {
 
     private Queue<ExpressionElement> elms;
     private String exp;

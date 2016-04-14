@@ -1,15 +1,6 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package calculator;
 
-/**
- *
- * @author guilherme
- */
-public class OperatorElement extends ExpressionElement {
+public class OperatorElement extends PolishElement {
 
     private static final char[] VALID_OPERATORS = {'+', '-', '*', '/', '^'};
 
@@ -40,7 +31,7 @@ public class OperatorElement extends ExpressionElement {
         double right = rightElm.getValue();
         double result = 0.0;
 
-        switch (op) {
+        switch (this.op) {
             case '+':
                 result = left + right;
                 break;

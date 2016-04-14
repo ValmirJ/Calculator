@@ -1,5 +1,6 @@
 package calculator;
 import java.lang.reflect.Method;
+
 public class Queue<X> implements Cloneable {
 
     protected Object[] queue;
