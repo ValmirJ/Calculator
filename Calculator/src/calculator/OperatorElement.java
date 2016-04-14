@@ -64,4 +64,32 @@ public class OperatorElement extends ExpressionElement {
 
         return new NumericElement(result);
     }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this)
+            return true;
+        
+        if (other == null)
+            return false;
+        
+        if (!(other instanceof OperatorElement))
+            return false;
+        
+        OperatorElement otherOper = (OperatorElement) other;
+        
+        return otherOper.op == this.op;
+    }
+
+    @Override
+    public String toString() {
+        return "OperatorElement<" + this.op + ">";
+    }
+
+    @Override
+    public int hashCode() {
+        int h = super.hashCode();
+        h += h * 29 + (new Character(this.op)).hashCode();
+        return h;
+    }
 }

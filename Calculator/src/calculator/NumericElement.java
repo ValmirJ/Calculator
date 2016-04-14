@@ -48,7 +48,7 @@ public class NumericElement extends ExpressionElement implements Comparable<Nume
     @Override
     public int hashCode() {
         int hash = super.hashCode();
-        hash += 67 * this.value;
+        hash = hash * 67 + Double.hashCode(this.value);
         return hash;
     }
 

@@ -35,10 +35,10 @@ public class Expression implements ExpressionContainer {
         this.elms = new Queue<>(exp.length());
 
         StringBuilder tempBuilder = new StringBuilder();
-
+        
         for (char c : this.exp.toCharArray()) {
             ExpressionElement elm = null;
-
+            
             try {
                 elm = new OperatorElement(c);
             } catch (Exception ex) {
@@ -54,23 +54,32 @@ public class Expression implements ExpressionContainer {
                 tempBuilder.append(c);
             } else {
                 if (tempBuilder.length() > 0) {
-                    double parsed = 0;
-
-                    try {
-                        parsed = Double.parseDouble(tempBuilder.toString());
-                    } catch (Exception ex) {
-                        throw new Exception("Invalid term " + tempBuilder.toString());
-                    }
-
-                    elms.enqueue(new NumericElement(parsed));
-                    tempBuilder.delete(0, tempBuilder.length());
+                    elms.enqueue(parseStringBuilder(tempBuilder));
                 }
-
+                
                 elms.enqueue(elm);
             }
         }
+        
+        if (tempBuilder.length() > 0) {
+            elms.enqueue(parseStringBuilder(tempBuilder));
+        }
     }
 
+    private NumericElement parseStringBuilder(StringBuilder builder) throws Exception {
+        double parsed = 0;
+
+        try {
+            parsed = Double.parseDouble(builder.toString());
+        } catch (Exception ex) {
+            throw new Exception("Invalid term " + builder.toString());
+        }
+
+        builder.delete(0, builder.length());
+        return new NumericElement(parsed);
+    }
+    
+    @Override
     public Queue<ExpressionElement> getExpressionQueue() {
         try {
             return (Queue<ExpressionElement>) elms.clone();
