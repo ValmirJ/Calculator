@@ -1,14 +1,5 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package calculator;
 
-/**
- *
- * @author guilherme
- */
 public class Expression implements ExpressionContainer {
 
     private Queue<ExpressionElement> elms;
@@ -34,7 +25,8 @@ public class Expression implements ExpressionContainer {
         // mapping 1:1 ExpressionElement
         this.elms = new Queue<>(exp.length());
 
-        StringBuilder tempBuilder = new StringBuilder();
+        StringBuilder tempBuilder = new StringBuilder(); 
+   
         
         for (char c : this.exp.toCharArray()) {
             ExpressionElement elm = null;
