@@ -102,7 +102,7 @@ public class Queue<X> implements Cloneable {
         if (other == null) {
             return false;
         }
-        if (other instanceof Queue) {
+        if (!(other instanceof Queue)) {
             return true;
         }
         Queue que = (Queue) other;
