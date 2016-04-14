@@ -52,20 +52,20 @@ public class Queue<X> implements Cloneable {
         if(last >= queue.length - 1){
             last = -1;
         }
+        this.last++;
+        this.elementCount++;
         if (elm instanceof Cloneable){
              Class c = elm.getClass();
              Class<?>[] formParams = null;
              Object[] realParams = null;
              Method m = c.getMethod("clone", formParams);
-             this.queue[this.first] = (X) m.invoke(elm, realParams);         
+             this.queue[this.last] = (X) m.invoke(elm, realParams);         
             }
         else{
-             this.queue[first] = elm;
+             this.queue[last] = elm;
             }
-        this.last++;
-        this.elementCount++;
     }
-
+    
     public X dequeue() throws Exception {
         X dequeued; 
         
