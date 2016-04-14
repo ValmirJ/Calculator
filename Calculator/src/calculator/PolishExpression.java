@@ -14,6 +14,12 @@ public class PolishExpression implements ExpressionContainer<PolishElement> {
         } catch (CloneNotSupportedException ex) {
             Logger.getLogger(PolishExpression.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
+        try {
+            this.outputQueue = new Queue<>(this.inputQueue.elementCount);
+        } catch (Exception ex) {
+            Logger.getLogger(PolishExpression.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
     public void generateOutput() throws Exception {
