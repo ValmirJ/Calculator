@@ -1,4 +1,4 @@
-package calculator;
+package calculator.structures;
 
 import java.lang.reflect.Method;
 

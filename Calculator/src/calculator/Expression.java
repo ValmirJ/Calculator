@@ -1,5 +1,11 @@
 package calculator;
 
+import calculator.models.ExpressionElement;
+import calculator.structures.Queue;
+import calculator.models.NumericElement;
+import calculator.models.ParenthesisElement;
+import calculator.models.OperatorElement;
+
 public class Expression implements ExpressionContainer<ExpressionElement> {
 
     private Queue<ExpressionElement> elms;

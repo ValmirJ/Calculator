@@ -1,4 +1,4 @@
-package calculator;
+package calculator.models;
 
 public class NumericElement extends PolishElement implements Comparable<NumericElement> {
 

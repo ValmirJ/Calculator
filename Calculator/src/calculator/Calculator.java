@@ -1,21 +1,15 @@
 package calculator;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
+import calculator.models.NumericElement;
+import calculator.models.PolishElement;
+import calculator.structures.Queue;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class Calculator {
 
-    public static void main(String[] args) {
+    public NumericElement calculate(String exp) {
         try {
-            BufferedReader b = new BufferedReader(new InputStreamReader(System.in));
-            String exp;
-
-            System.out.print("Calculadora:\n\n");
-            System.out.print("Digite a expressão que será resolvida:\n");
-
-            exp = b.readLine();
 
             Expression e = new Expression(exp);
             e.parseExpression();
@@ -31,12 +25,18 @@ public class Calculator {
 
             while (true) {
                 el = q.dequeue();
-                System.out.println("Desenfileirou: " + el.toString());
+                if (el != null) {
+                    Logger.getLogger(Calculator.class.getName()).log(Level.INFO, "Desenfileirou: " + el.toString());
+                } else {
+                    Logger.getLogger(Calculator.class.getName()).log(Level.SEVERE, "Desenfileirou um elemento nulo");
+                }
             }
 
         } catch (Exception ex) {
             Logger.getLogger(Calculator.class.getName()).log(Level.SEVERE, null, ex);
         }
+
+        return new NumericElement(0.0);
     }
 
 }

@@ -1,4 +1,4 @@
-package calculator;
+package calculator.models;
 
 public class OperatorElement extends PolishElement {
 
