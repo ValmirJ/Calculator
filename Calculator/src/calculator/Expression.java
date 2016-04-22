@@ -38,7 +38,7 @@ public class Expression implements ExpressionContainer<ExpressionElement> {
         }
 
         this.exp = exp;
-        numberExp = Pattern.compile("\\A(?<number>\\d+(\\.\\d+)?)(?<remaining>.*)\\z");
+        numberExp = Pattern.compile("\\A(?<number>(-)?\\d+(\\.\\d+)?)(?<remaining>.*)\\z");
     }
 
     public void parseExpression() throws InvalidExpression {
@@ -59,21 +59,26 @@ public class Expression implements ExpressionContainer<ExpressionElement> {
         }
 
         try {
-            OperatorElement oe = new OperatorElement(exp.charAt(0));
+            char op = exp.charAt(0);
+            OperatorElement oe = new OperatorElement(op);
 
-            if (!shouldStartWithSignal) {
+            if (exp.length() > 1 && exp.charAt(1) == '-' && (op == '+' || op == '-')) {
+                throw new InvalidExpression("Unexpected " + exp.charAt(1));
+            }
+
+            if (shouldStartWithSignal) {
+                try {
+                    elms.enqueue(oe);
+                } catch (Exception ex) {
+                    Logger.getLogger(Expression.class.getName()).log(Level.SEVERE, null, ex);
+                }
+
+                parseExpression(exp.substring(1), false);
+
+                return;
+            } else if (op != '-') {
                 throw new InvalidExpression("Unexpected " + oe.toString());
             }
-
-            try {
-                elms.enqueue(oe);
-            } catch (Exception ex) {
-                Logger.getLogger(Expression.class.getName()).log(Level.SEVERE, null, ex);
-            }
-
-            parseExpression(exp.substring(1), false);
-
-            return;
         } catch (InvalidOperatorElement ex) {
             if (shouldStartWithSignal) {
                 throw new InvalidExpression("Expected a Operator. Got " + exp.charAt(0));
