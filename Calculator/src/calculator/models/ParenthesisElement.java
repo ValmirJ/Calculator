@@ -2,19 +2,29 @@ package calculator.models;
 
 public class ParenthesisElement extends ExpressionElement {
 
+    public class InvalidParenthesisElement extends Exception {
+    };
+
     private static final char[] VALID_PARENTHESIS = {'(', ')'};
 
     private char op;
 
-    public ParenthesisElement(char op) throws Exception {
+    public static boolean isParenthesis(char op) {
         for (char o : VALID_PARENTHESIS) {
             if (o == op) {
-                this.op = op;
-                return;
+                return true;
             }
         }
 
-        throw new Exception("Invalid Parenthesis");
+        return false;
+    }
+
+    public ParenthesisElement(char op) throws InvalidParenthesisElement {
+        if (!ParenthesisElement.isParenthesis(op)) {
+            throw new InvalidParenthesisElement();
+        }
+
+        this.op = op;
     }
 
     @Override

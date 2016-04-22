@@ -2,11 +2,13 @@ package calculator.models;
 
 public class OperatorElement extends PolishElement {
 
+    public class InvalidOperatorElement extends Exception {
+    };
     private static final char[] VALID_OPERATORS = {'+', '-', '*', '/', '^'};
 
     private char op;
 
-    public OperatorElement(char op) throws Exception {
+    public OperatorElement(char op) throws InvalidOperatorElement {
         for (char o : VALID_OPERATORS) {
             if (o == op) {
                 this.op = op;
@@ -14,7 +16,7 @@ public class OperatorElement extends PolishElement {
             }
         }
 
-        throw new Exception("Invalid Operator");
+        throw new InvalidOperatorElement();
     }
 
     @Override
