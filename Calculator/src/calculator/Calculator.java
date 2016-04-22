@@ -16,11 +16,10 @@ public class Calculator {
             PolishExpression pe = new PolishExpression(e);
             pe.generateOutput();
 
-            // TODO: Transform `e` in a PosfixedExpression
-            // TODO: Evaluate the PosfixedExpression
-            //
-            // To debug pruporses:
-            Queue<PolishElement> q = pe.getExpressionQueue();
+            PolishExpressionEvaluator pee = new PolishExpressionEvaluator(pe);
+            pee.generateOutput();
+
+            Queue<PolishElement> q = pee.getExpressionQueue();
             PolishElement el;
 
             while (true) {
