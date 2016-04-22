@@ -1,6 +1,5 @@
 package calculator;
 
-import calculator.models.NumericElement;
 import calculator.models.PolishElement;
 import calculator.structures.Queue;
 import java.util.logging.Level;
@@ -8,9 +7,10 @@ import java.util.logging.Logger;
 
 public class Calculator {
 
-    public NumericElement calculate(String exp) {
-        try {
+    public String calculate(String exp) {
+        StringBuilder builder = new StringBuilder();
 
+        try {
             Expression e = new Expression(exp);
             e.parseExpression();
             PolishExpression pe = new PolishExpression(e);
@@ -24,19 +24,20 @@ public class Calculator {
             PolishElement el;
 
             while (true) {
-                el = q.dequeue();
-                if (el != null) {
-                    Logger.getLogger(Calculator.class.getName()).log(Level.INFO, "Desenfileirou: " + el.toString());
-                } else {
-                    Logger.getLogger(Calculator.class.getName()).log(Level.SEVERE, "Desenfileirou um elemento nulo");
+                try {
+                    el = q.dequeue();
+                    builder.append(el);
+                } catch (Exception ex) {
+                    break;
                 }
             }
 
         } catch (Exception ex) {
             Logger.getLogger(Calculator.class.getName()).log(Level.SEVERE, null, ex);
+            builder.append(ex.getMessage());
         }
 
-        return new NumericElement(0.0);
+        return builder.toString();
     }
 
 }

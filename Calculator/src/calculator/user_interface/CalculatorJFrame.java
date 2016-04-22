@@ -6,7 +6,6 @@
 package calculator.user_interface;
 
 import calculator.Calculator;
-import calculator.models.NumericElement;
 
 /**
  *
@@ -202,8 +201,8 @@ public class CalculatorJFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonAcActionPerformed
 
     private void jButtonEqualActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEqualActionPerformed
-        NumericElement result = calculator.calculate(jLabelDisplay.getText());
-        jLabelDisplay.setText(Double.toString(result.getValue()));
+        String result = calculator.calculate(jLabelDisplay.getText());
+        jLabelDisplay.setText(result);
     }//GEN-LAST:event_jButtonEqualActionPerformed
 
     private void setupButtons() {

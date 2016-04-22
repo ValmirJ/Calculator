@@ -58,23 +58,26 @@ public class OperatorElement extends PolishElement {
 
     @Override
     public boolean equals(Object other) {
-        if (other == this)
+        if (other == this) {
             return true;
-        
-        if (other == null)
+        }
+
+        if (other == null) {
             return false;
-        
-        if (!(other instanceof OperatorElement))
+        }
+
+        if (!(other instanceof OperatorElement)) {
             return false;
-        
+        }
+
         OperatorElement otherOper = (OperatorElement) other;
-        
+
         return otherOper.op == this.op;
     }
 
     @Override
     public String toString() {
-        return "OperatorElement<" + this.op + ">";
+        return "<" + this.op + ">";
     }
 
     @Override

@@ -28,6 +28,12 @@ public class PolishExpression implements ExpressionContainer<PolishElement> {
         } catch (Exception ex) {
             Logger.getLogger(PolishExpression.class.getName()).log(Level.SEVERE, null, ex);
         }
+
+        try {
+            this.mStack = new Stack<>(this.inputQueue.getElementCount());
+        } catch (Exception ex) {
+            Logger.getLogger(PolishExpression.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     public void generateOutput() throws Exception {

@@ -45,7 +45,7 @@ public class NumericElement extends PolishElement implements Comparable<NumericE
 
     @Override
     public String toString() {
-        return "NumericElement<" + this.value + ">";
+        return "<" + this.value + ">";
     }
 
     @Override
