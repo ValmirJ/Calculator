@@ -67,7 +67,7 @@ public class ParenthesisElement extends ExpressionElement {
     @Override
     public int hashCode() {
         int h = super.hashCode();
-        h = h * 29 + Character.hashCode(this.op);
+        h = h * 29 + new Character(this.op).hashCode();
         return h;
     }
 }

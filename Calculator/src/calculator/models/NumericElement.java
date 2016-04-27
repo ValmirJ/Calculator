@@ -39,7 +39,7 @@ public class NumericElement extends PolishElement implements Comparable<NumericE
     @Override
     public int hashCode() {
         int hash = super.hashCode();
-        hash = hash * 67 + Double.hashCode(this.value);
+        hash = hash * 67 + new Double(this.value).hashCode();
         return hash;
     }
 
