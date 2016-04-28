@@ -58,6 +58,25 @@ public class OperatorElement extends PolishElement {
         return new NumericElement(result);
     }
 
+    public boolean isPrioritary(OperatorElement other) {
+        int me = this.priorityCost();
+        int otherCost = other.priorityCost();
+        
+        if (me > otherCost)
+            return true;
+        
+        return false;
+    }
+    
+    private int priorityCost() {
+        if (op == '^')
+            return 3;
+        if (op == '/' || op == '*')
+            return 2;
+        
+        return 1;
+    }
+    
     @Override
     public boolean equals(Object other) {
         if (other == this) {
