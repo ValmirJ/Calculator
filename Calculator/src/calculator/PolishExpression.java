@@ -57,7 +57,7 @@ public class PolishExpression implements ExpressionContainer<PolishElement> {
                         ExpressionElement last = (ExpressionElement)this.mStack.pop();
                         if(last instanceof OperatorElement && ((OperatorElement)last).isPrioritary((OperatorElement)aux)) { 
                             this.outputQueue.enqueue((OperatorElement)last);
-                            this.mStack.push(aux); 
+                            this.mStack.push((OperatorElement)aux); 
                         }
                         else {
                             this.mStack.push(last);

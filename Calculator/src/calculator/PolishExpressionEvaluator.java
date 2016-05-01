@@ -5,6 +5,8 @@
  */
 package calculator;
 
+import calculator.models.NumericElement;
+import calculator.models.OperatorElement;
 import calculator.models.PolishElement;
 import calculator.structures.Queue;
 import calculator.structures.Stack;
@@ -41,13 +43,44 @@ public class PolishExpressionEvaluator implements ExpressionContainer<PolishElem
         }
     }
 
+    private NumericElement solveOperation(NumericElement n1, NumericElement n2, OperatorElement signal) {
+        double result;
+        switch(signal.getOperator()) {
+            case '+':
+                result = n1.getValue() + n2.getValue();
+                break;
+            case '-':
+                result = n1.getValue() - n2.getValue();
+                break;
+            case '*':
+                result = n1.getValue() * n2.getValue();
+                break;
+            case '/':
+                result = n1.getValue() / n2.getValue();
+                    break;
+            default: 
+                result = Math.pow(n1.getValue(), n2.getValue());
+        }
+        return new NumericElement(result);
+    }
+    
     public void generateOutput() throws Exception {
-        // TODO: Replace this with the correct algorythm
-
+        PolishElement aux;
+        NumericElement aux1, aux2;
+        OperatorElement auxSignal;
         for (;;) {
             try {
-                outputQueue.enqueue(inputQueue.dequeue());
+                aux = this.inputQueue.dequeue();
+                if(aux instanceof NumericElement)
+                    this.mStack.push((NumericElement)aux);
+                else {
+                    auxSignal = (OperatorElement)aux;
+                    aux2 = (NumericElement)this.mStack.pop();
+                    aux1 = (NumericElement)this.mStack.pop();
+                    this.mStack.push(solveOperation(aux1, aux2, auxSignal));
+                }
             } catch (Exception ex) {
+                outputQueue.enqueue(mStack.pop());
                 break;
             }
         }
