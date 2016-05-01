@@ -54,10 +54,20 @@ public class PolishExpression implements ExpressionContainer<PolishElement> {
                 }
                 if (aux instanceof OperatorElement) {
                     try {
-                        this.mStack.push((OperatorElement) aux);
-                    } catch (Exception e) {
-                        Logger.getLogger(PolishExpression.class.getName()).log(Level.SEVERE, null, e);
+                        OperatorElement last = (OperatorElement)this.mStack.pop();
+                        if(((OperatorElement)aux).isPrioritary(last)) {
+                            this.mStack.push(last);
+                            this.mStack.push((OperatorElement)aux);
+                        }
+                        else {
+                            this.mStack.push((OperatorElement)aux);
+                            this.mStack.push(last); 
+                        }
                     }
+                    catch(Exception e){
+                        this.mStack.push((OperatorElement) aux);
+                    }
+                        
                 }
                 if (aux instanceof ParenthesisElement) {
                     try {
