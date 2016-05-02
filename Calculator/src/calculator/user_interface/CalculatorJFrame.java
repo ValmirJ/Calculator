@@ -33,6 +33,14 @@ public class CalculatorJFrame extends javax.swing.JFrame {
         jLabelDisplay.setText(jLabelDisplay.getText() + c);
     }
 
+    private void clearLastChar() {
+        String str = jLabelDisplay.getText();
+        if(str.length() > 0) {
+            str = str.substring(0, str.length()-1);
+            jLabelDisplay.setText(str);
+        }
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -253,9 +261,7 @@ public class CalculatorJFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_formKeyPressed
 
     private void jButtonCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCActionPerformed
-        String str = jLabelDisplay.getText();
-        str = str.substring(0, str.length()-1);
-        jLabelDisplay.setText(str);
+        clearLastChar();
     }//GEN-LAST:event_jButtonCActionPerformed
 
     private void jButtonParOpenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonParOpenActionPerformed
@@ -286,6 +292,12 @@ public class CalculatorJFrame extends javax.swing.JFrame {
                     if (k == c) {
                         process(c);
                     }
+                    if(k == '=' || k == '\n') {
+                        String result = calculator.calculate(jLabelDisplay.getText());
+                        jLabelDisplay.setText(result);
+                    }
+                    if(k == '\b')
+                       clearLastChar();
                 }
             }
 
@@ -319,6 +331,7 @@ public class CalculatorJFrame extends javax.swing.JFrame {
         jButtonPlus.addActionListener(listener);
         jButtonParOpen.addActionListener(listener);
         jButtonParClose.addActionListener(listener);
+        jButtonPow.addActionListener(listener);
     }
 
     /**
