@@ -62,7 +62,7 @@ public class OperatorElement extends PolishElement {
         int me = this.priorityCost();
         int otherCost = other.priorityCost();
         
-        if (me > otherCost)
+        if (me >= otherCost)
             return true;
         
         return false;
