@@ -32,8 +32,7 @@ public class CalculatorJFrame extends javax.swing.JFrame {
         setupButtons();
         calculator = new Calculator();
         
-        
-        //add Tadeu
+        //add Tadeuuuu
         setSize(400, 320); //fixa tamanho da window
 	setResizable(false); //"retira" botão maximizar
     }
