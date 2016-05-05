@@ -307,6 +307,21 @@ public class CalculatorJFrame extends javax.swing.JFrame {
 
             @Override
             public void keyReleased(KeyEvent e) {
+                boolean ctrlDown = e.isControlDown();
+                int v = e.getKeyCode();
+                
+                boolean ctrlV = ctrlDown && v == 86;
+                if (ctrlV) {
+                    try {
+                        String data = (String) Toolkit.getDefaultToolkit() 
+                                .getSystemClipboard().getData(DataFlavor.stringFlavor);
+                        jLabelDisplay.setText(data);
+                    } catch (UnsupportedFlavorException ex) {
+                        Logger.getLogger(CalculatorJFrame.class.getName()).log(Level.SEVERE, null, ex);
+                    } catch (IOException ex) {
+                        Logger.getLogger(CalculatorJFrame.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
             }
         };
 
